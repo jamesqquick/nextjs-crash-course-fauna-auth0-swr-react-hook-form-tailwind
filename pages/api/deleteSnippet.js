@@ -1,9 +1,13 @@
 import { deleteSnippet } from '../../utils/Fauna';
 export default async function handler(req, res) {
-    const { id } = req.body;
     if (req.method !== 'DELETE') {
         return res.status(405).json({ msg: 'Method not allowed' });
     }
+
+    console.log(req.body);
+    console.log(req.body.id);
+    const { id } = req.body;
+    console.log(id);
     try {
         const deleted = await deleteSnippet(id);
         return res.status(200).json(deleted);
