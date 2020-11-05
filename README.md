@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) crash course project that uses Tailwind CSS, SWR, React Hook Form, and FaunaDB!
+
+## Step 1
+
+[Sign up for a free account at FaunaDB](http://bit.ly/jqqfauna).
 
 ## Getting Started
 
