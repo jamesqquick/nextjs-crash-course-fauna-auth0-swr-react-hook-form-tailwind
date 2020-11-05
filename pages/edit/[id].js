@@ -20,10 +20,9 @@ export default function Home({ snippet }) {
 
 export async function getServerSideProps(context) {
     try {
-        const id = context.params.id;
-        const snippet = await getSnippetById(id);
+        //TODO: Get and return snippet as prop
         return {
-            props: { snippet },
+            props: {},
         };
     } catch (error) {
         console.error(error);
