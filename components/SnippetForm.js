@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 export default function SnippetForm({ snippet }) {
-    const { register, handleSubmit, errors, reset } = useForm({
+    const { register, handleSubmit, errors } = useForm({
         defaultValues: {
             code: snippet ? snippet.data.code : '',
             language: snippet ? snippet.data.language : '',
@@ -24,6 +24,20 @@ export default function SnippetForm({ snippet }) {
                 },
             });
             router.push('/');
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const deleteSnippet = async () => {
+        try {
+            await fetch('/api/deleteSnippet', {
+                method: 'DELETE',
+                body: JSON.stringify({ id: snippet.id }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
         } catch (err) {
             console.error(err);
         }
@@ -78,9 +92,9 @@ export default function SnippetForm({ snippet }) {
                     className="w-full border bg-white rounded px-3 py-2 outline-none text-gray-700"
                     ref={register({ required: true })}
                 >
-                    <option className="py-1">JavaScript</option>
-                    <option className="py-1">HTML</option>
-                    <option className="py-1">CSS</option>
+                    <option className="py-1">javascript</option>
+                    <option className="py-1">html</option>
+                    <option className="py-1">css</option>
                 </select>
                 {errors.language && (
                     <p className="font-bold text-red-900">
@@ -135,10 +149,19 @@ export default function SnippetForm({ snippet }) {
                 Save
             </button>
             <Link href="/">
-                <a className="mt-3 inline-block bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                <a className="mt-3 inline-block bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
                     Cancel
                 </a>
             </Link>
+            {snippet && (
+                <button
+                    className="bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                    type="submit"
+                    onClick={deleteSnippet}
+                >
+                    Delete
+                </button>
+            )}
         </form>
     );
 }

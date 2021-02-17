@@ -3,23 +3,9 @@ import Code from './code';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-export default function Snippet({ snippet, snippetDeleted }) {
+export default function Snippet({ snippet }) {
     const router = useRouter();
 
-    const deleteSnippet = async () => {
-        try {
-            await fetch('/api/deleteSnippet', {
-                method: 'DELETE',
-                body: JSON.stringify({ id: snippet.id }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            snippetDeleted();
-        } catch (err) {
-            console.error(err);
-        }
-    };
     return (
         <div className="bg-gray-100 p-4 rounded-md my-2 shadow-lg">
             <div className="flex items-center justify-between mb-2">
@@ -35,9 +21,6 @@ export default function Snippet({ snippet, snippetDeleted }) {
             <Link href={`/edit/${snippet.id}`}>
                 <a className="text-gray-800 mr-2">Edit</a>
             </Link>
-            <button onClick={deleteSnippet} className="text-gray-800 mr-2">
-                Delete
-            </button>
         </div>
     );
 }
