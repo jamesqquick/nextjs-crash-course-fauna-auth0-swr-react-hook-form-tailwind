@@ -1,11 +1,9 @@
 import Head from 'next/head';
 import { getSnippetsByLanguage } from '../../utils/Fauna';
 import Snippet from '../../components/Snippet';
-import { useRouter } from 'next/router';
+import Header from '../../components/Header';
 
 export default function SnippetsByLanguage({ language, snippets }) {
-    const router = useRouter();
-
     return (
         <>
             <Head>
@@ -14,9 +12,8 @@ export default function SnippetsByLanguage({ language, snippets }) {
             </Head>
 
             <main className="my-12">
-                <h1 className="text-red-100 text-2xl mb-6">
-                    Code Snippets for "{language}"
-                </h1>
+                <Header title={`${language.toUpperCase()} Snippets`} />
+
                 {snippets &&
                     snippets.length > 0 &&
                     snippets.map((snippet) => (
@@ -25,7 +22,7 @@ export default function SnippetsByLanguage({ language, snippets }) {
                 {!snippets ||
                     (snippets.length === 0 && (
                         <p className="text-red-200">
-                            There are no snippets yet
+                            There are no {language} snippets yet 🙁
                         </p>
                     ))}
             </main>
@@ -35,9 +32,8 @@ export default function SnippetsByLanguage({ language, snippets }) {
 
 export async function getServerSideProps(context) {
     const { language } = context.params;
-    console.log(language);
     const snippets = await getSnippetsByLanguage(language.toLowerCase());
     return {
-        props: { language: language, snippets }, // will be passed to the page component as props
+        props: { language, snippets },
     };
 }

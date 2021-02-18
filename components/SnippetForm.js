@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useUser } from '@auth0/nextjs-auth0';
 export default function SnippetForm({ snippet }) {
     const { register, handleSubmit, errors } = useForm({
         defaultValues: {

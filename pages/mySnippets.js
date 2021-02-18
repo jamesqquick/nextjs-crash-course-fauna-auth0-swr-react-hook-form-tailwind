@@ -1,8 +1,14 @@
 import Head from 'next/head';
 import React from 'react';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import useSWR from 'swr';
+import Snippet from '../components/Snippet';
+import Link from 'next/link';
+import Header from '../components/Header';
 
-export default function mySnippets() {
-    const snippets = [];
+export default function MySnippets() {
+    const { data: snippets, mutate } = useSWR('/api/mySnippets');
+
     return (
         <div>
             <Head>
@@ -10,7 +16,7 @@ export default function mySnippets() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="my-12">
-                <h1 className="text-red-100 text-2xl mb-6">My Code Snippets</h1>
+                <Header title="My Code Snippets" />
                 {snippets &&
                     snippets.length > 0 &&
                     snippets.map((snippet) => (
@@ -28,3 +34,4 @@ export default function mySnippets() {
 }
 
 //TODO: Server props, require authentication
+export const getServerSideProps = withPageAuthRequired();

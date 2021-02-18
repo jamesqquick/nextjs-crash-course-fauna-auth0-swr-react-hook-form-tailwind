@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import SnippetForm from '../components/SnippetForm';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 export default function Home() {
     return (
@@ -16,3 +17,4 @@ export default function Home() {
         </div>
     );
 }
+export const getServerSideProps = withPageAuthRequired();

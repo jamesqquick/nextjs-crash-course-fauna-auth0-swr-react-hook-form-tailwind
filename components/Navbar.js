@@ -8,20 +8,36 @@ export default function Navbar() {
     return (
         <header>
             <Link href="/">
-                <h1>Home</h1>
+                <a className="text-2xl mb-2 block text-center text-red-200 uppercase">
+                    Errday Snippets
+                </a>
             </Link>
             <nav className="space-x-3 m-x-auto mb-6 flex justify-center">
-                <Link href="/snippets/html">HTML</Link>
-                <Link href="/snippets/css">CSS</Link>
-                <Link href="/snippets/javascript">JavaScript</Link>
+                <Link href="/snippets/html">
+                    <a className="text-red-100 hover:underline">HTML</a>
+                </Link>
+                <Link href="/snippets/css">
+                    <a className="text-red-100 hover:underline">CSS</a>
+                </Link>
+                <Link href="/snippets/javascript">
+                    <a className="text-red-100 hover:underline">JavaScript</a>
+                </Link>
                 {!isLoading && !user && (
-                    <Link href="/api/auth/login">Login</Link>
+                    <Link href="/api/auth/login">
+                        <a className="text-red-100 hover:underline">Login</a>
+                    </Link>
                 )}
                 {!isLoading && user && (
-                    <Link href="/mySnippets">My Snippets</Link>
+                    <Link href="/mySnippets">
+                        <a className="text-red-100 hover:underline">
+                            My Snippets
+                        </a>
+                    </Link>
                 )}
                 {!isLoading && user && (
-                    <Link href="/api/auth/logout">Logout</Link>
+                    <Link href="/api/auth/logout">
+                        <a className="text-red-100 hover:underline">Logout</a>
+                    </Link>
                 )}
             </nav>
         </header>

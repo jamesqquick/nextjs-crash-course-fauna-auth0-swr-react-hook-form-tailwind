@@ -1,5 +1,9 @@
 import { deleteSnippet } from '../../utils/Fauna';
-export default async function handler(req, res) {
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
+
+export default withApiAuthRequired(async function handler(req, res) {
+    const session = getSession(req, res);
+
     if (req.method !== 'DELETE') {
         return res.status(405).json({ msg: 'Method not allowed' });
     }
