@@ -2,10 +2,12 @@ import React from 'react';
 import Code from './code';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useUser } from '@auth0/nextjs-auth0';
 
 export default function Snippet({ snippet }) {
     const router = useRouter();
-
+    const { user } = useUser();
+    console.log(user, snippet);
     return (
         <div className="bg-gray-100 p-4 rounded-md my-2 shadow-lg">
             <div className="flex items-center justify-between mb-2">
@@ -18,9 +20,11 @@ export default function Snippet({ snippet }) {
             </div>
             <p className="text-gray-900 mb-4">{snippet.data.description}</p>
             <Code code={snippet.data.code} />
-            <Link href={`/edit/${snippet.id}`}>
-                <a className="text-gray-800 mr-2">Edit</a>
-            </Link>
+            {user && user.sub === snippet.data.userId && (
+                <Link href={`/edit/${snippet.id}`}>
+                    <a className="text-gray-800 mr-2">Edit</a>
+                </Link>
+            )}
         </div>
     );
 }
