@@ -1,11 +1,9 @@
 import React from 'react';
 import Code from './code';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
 
 export default function Snippet({ snippet }) {
-    const router = useRouter();
     const { user } = useUser();
     console.log(user, snippet);
     return (

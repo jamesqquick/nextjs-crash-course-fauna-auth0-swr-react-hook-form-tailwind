@@ -7,7 +7,7 @@ export default function Header({ title, subtitle = '' }) {
     const { user, isLoading } = useUser();
 
     return (
-        <div className="my-12">
+        <header className="my-12">
             <h1 className="text-red-100 text-2xl">{title}</h1>
             <p className="text-red-200">
                 Create and browse snippets you use every day in Web Development!
@@ -26,6 +26,6 @@ export default function Header({ title, subtitle = '' }) {
                     </a>
                 </Link>
             )}
-        </div>
+        </header>
     );
 }
