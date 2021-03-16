@@ -3,11 +3,10 @@ import React from 'react';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import useSWR from 'swr';
 import Snippet from '../components/Snippet';
-import Link from 'next/link';
 import Header from '../components/Header';
 
 export default function MySnippets() {
-    const { data: snippets, mutate } = useSWR('/api/mySnippets');
+    const { data: snippets } = useSWR('/api/mySnippets');
 
     return (
         <div>
@@ -33,5 +32,4 @@ export default function MySnippets() {
     );
 }
 
-//TODO: Server props, require authentication
 export const getServerSideProps = withPageAuthRequired();
